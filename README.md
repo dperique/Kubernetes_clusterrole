@@ -8,6 +8,10 @@ You will need admin access to your cluster to create these objects.
 Use it like this:
 
 ```
+# Make sure you have ansible and kubectl installed.
+# Make sure you can set context to a k8s cluster and have enough privileges
+# to create the objects.
+#
 git clone <this repo>
 
 kubectl config current-context <mykubecluster>
