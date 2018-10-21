@@ -1,0 +1,11 @@
+do_it: 1
+clean_it: 0
+
+# These are set in the main script that calls this playbook.
+#
+#cluster_name: dennis-test
+#sa_account: generic-read-only-sa
+
+cr_name: generic-read-only-cr
+crb_name: generic-read-only-crb
+namespace: default

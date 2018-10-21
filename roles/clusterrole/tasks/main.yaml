@@ -1,0 +1,20 @@
+---
+- include_vars: settings.yaml
+
+- name: Generate the yaml template
+  template:
+    src: clusterrole.j2
+    dest: /tmp/{{ cluster_name }}-clusterrole.yaml
+
+- name: Set context to that cluster
+  shell:
+    kubectl config use-context {{ cluster_name }}
+
+- name: Create the clusterrole, etc.
+  shell:
+    kubectl apply -f /tmp/{{ cluster_name }}-clusterrole.yaml
+
+- name: Remove the clusterrolebinding, etc.
+  shell: 
+    kubectl delete -f /tmp/{{ cluster_name }}-clusterrole.yaml
+  when: clean_it == 1

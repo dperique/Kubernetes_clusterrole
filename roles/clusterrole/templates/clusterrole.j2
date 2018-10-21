@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ sa_account }}
+  namespace: {{ namespace }}
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: {{ namespace }}
+  name: {{ cr_name }}
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log", "jobs.batch", "configmaps", "services", "persistentvolumes", "persistentvolumeclaims", "deployments", "secrets"]
+  verbs: ["get", "watch", "list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ crb_name }}
+  namespace: {{ namespace }}
+subjects:
+- kind: ServiceAccount
+  name: {{ sa_account }}
+  namespace: {{ namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ cr_name }}
+  apiGroup: rbac.authorization.k8s.io
